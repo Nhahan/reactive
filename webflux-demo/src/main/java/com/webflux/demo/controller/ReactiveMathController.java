@@ -26,6 +26,9 @@ public class ReactiveMathController {
         return reactiveMathService.multiplicationTable(input);
     }
 
+    /**
+     * text/event-stream
+     */
     @GetMapping(value = "/math/table/{input}/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Response> multiplicationTableStream(@PathVariable int input) {
         return reactiveMathService.multiplicationTable(input);
