@@ -1,5 +1,6 @@
 package com.webflux.demo.controller;
 
+import com.webflux.demo.dto.MultiplyRequestDto;
 import com.webflux.demo.dto.Response;
 import com.webflux.demo.service.ReactiveMathService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,7 @@ public class ReactiveMathController {
     }
 
     @PostMapping
-    public Mono<Response> multiply(@RequestBody Mono<Response> requestDtoMono) {
-
+    public Mono<Response> multiply(@RequestBody Mono<MultiplyRequestDto> requestDtoMono) {
+        return this.reactiveMathService.multiply(requestDtoMono);
     }
 }
