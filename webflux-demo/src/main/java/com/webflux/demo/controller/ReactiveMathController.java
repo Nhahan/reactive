@@ -33,7 +33,7 @@ public class ReactiveMathController {
         return reactiveMathService.multiplicationTable(input);
     }
 
-    @PostMapping
+    @PostMapping("/math/multiply")
     public Mono<Response> multiply(@RequestBody Mono<MultiplyRequestDto> requestDtoMono) {
         return this.reactiveMathService.multiply(requestDtoMono);
     }
