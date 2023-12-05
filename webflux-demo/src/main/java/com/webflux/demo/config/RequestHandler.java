@@ -35,4 +35,12 @@ public class RequestHandler {
                 .contentType(MediaType.TEXT_EVENT_STREAM)
                 .body(responseFlux, Response.class);
     }
+
+    public Mono<ServerResponse> multiplyHandler(ServerRequest serverRequest) {
+        int input = Integer.parseInt(serverRequest.pathVariable("input"));
+        Flux<Response> responseFlux = reactiveMathService.multiplicationTable(input);
+        return ServerResponse.ok()
+                .contentType(MediaType.TEXT_EVENT_STREAM)
+                .body(responseFlux, Response.class);
+    }
 }
