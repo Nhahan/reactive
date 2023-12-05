@@ -1,5 +1,6 @@
 package com.webflux.demo.config;
 
+import com.webflux.demo.dto.MultiplyRequestDto;
 import com.webflux.demo.dto.Response;
 import com.webflux.demo.service.ReactiveMathService;
 import lombok.RequiredArgsConstructor;
@@ -37,10 +38,9 @@ public class RequestHandler {
     }
 
     public Mono<ServerResponse> multiplyHandler(ServerRequest serverRequest) {
-        int input = Integer.parseInt(serverRequest.pathVariable("input"));
-        Flux<Response> responseFlux = reactiveMathService.multiplicationTable(input);
+        Mono<MultiplyRequestDto> requestDtoMono = serverRequest.bodyToMono(MultiplyRequestDto.class);
+        Mono<Response> multiply = reactiveMathService.multiply(requestDtoMono);
         return ServerResponse.ok()
-                .contentType(MediaType.TEXT_EVENT_STREAM)
-                .body(responseFlux, Response.class);
+                .body(multiply, Response.class);
     }
 }
