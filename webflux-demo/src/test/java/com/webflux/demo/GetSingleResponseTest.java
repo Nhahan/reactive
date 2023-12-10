@@ -12,7 +12,8 @@ public class GetSingleResponseTest extends BaseTest {
 
     @Test
     public void blockTest() {
-        Response response = webClient.get()
+        Response response = webClient
+                .get()
                 .uri("router/square/{number}", 5)
                 .retrieve()
                 .bodyToMono(Response.class) // Mono<Response>
