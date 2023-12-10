@@ -8,6 +8,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class CalculatorHandler {
 
+    // calculator/{a}/{b}
     public Mono<ServerResponse> additionHandler(ServerRequest request) {
         int a = getValue(request, "a");
         int b = getValue(request, "b");
