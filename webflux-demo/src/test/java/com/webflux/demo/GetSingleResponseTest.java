@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 public class GetSingleResponseTest extends BaseTest {
 
@@ -30,6 +31,10 @@ public class GetSingleResponseTest extends BaseTest {
                 .uri("router/square/{number}", 5)
                 .retrieve()
                 .bodyToMono(Response.class);// Mono<Response>
+
+        StepVerifier.create(responseMono)
+                .expectNextMatches(response -> response.getOutput() == 25)
+                .verifyComplete();
     }
 
 }
